@@ -7,10 +7,10 @@ In the terminal run npm install.
 Then run npm install node.
 
 Install docker as follows:
-Windows: https://docs.docker.com/desktop/setup/install/windows-install/
+Windows: https://docs.docker.com/desktop/setup/install/windows-install/                                                                
 Ubuntu: https://docs.docker.com/engine/install/ubuntu/
 
-run the command
+Run the command
 "docker build -f backend/Dockerfile -t express-docker-app ."
 
 Then run the command
