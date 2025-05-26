@@ -2,7 +2,7 @@ The steps to run docker include:
 
 Clone the GIT Project Repository.
 In the terminal run npm install.
-then run npm install node.
+Then run npm install node.
 Install docker as follows:
 Windows: https://docs.docker.com/desktop/setup/install/windows-install/
 Ubuntu: https://docs.docker.com/engine/install/ubuntu/
