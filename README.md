@@ -2,9 +2,9 @@ The steps to run docker include:
 
 Clone the GIT Project Repository.
 
-In the terminal run npm install.
+In the terminal 'run npm install'.
 
-Then run npm install node.
+Then run 'npm install node'.
 
 Install docker as follows:
 Windows: https://docs.docker.com/desktop/setup/install/windows-install/                                                                
@@ -21,3 +21,5 @@ Open the browser and access the port:
 
 The output displayed there would be:
 { "name": "Levin Jospeh Poovakulath", "studentId" : "s224877838" }
+
+run 'docker ps' to get detils of the docker container rumming
