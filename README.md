@@ -1,4 +1,8 @@
-The seps to run docker include:
+The steps to run docker include:
+
+
+
+
 Clone the GIT Project Repository.
 In the terminal write npm install.
 then npm install node.
