@@ -10,6 +10,6 @@ run the command
 Then run the command
 "docker run -p 3000:3000 express-docker-app"
 Open the browser and access the port:
-"http://localhost:3000/api/stud"
+"http://localhost:3000/api/student"
 The output displayed there would be:
 { "name": "Levin Jospeh Poovakulath", "studentId" : "s224877838" }
