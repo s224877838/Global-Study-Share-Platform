@@ -3,6 +3,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const seedSuperAdmin = require("./seeders/admin");
+const studRte = require("./controllers/studControll");
 const {
   handleLogin,
   handleLogout,
@@ -119,3 +120,4 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
 mongoose.connection.once("open", async () => {
   await seedSuperAdmin();
 });
+router.get("/student", studRte);
