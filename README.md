@@ -11,15 +11,16 @@ Windows: https://docs.docker.com/desktop/setup/install/windows-install/
 Ubuntu: https://docs.docker.com/engine/install/ubuntu/
 
 Run the command
-"docker build -f backend/Dockerfile -t express-docker-app ."
-
-Then run the command
-"docker run -p 3000:3000 express-docker-app"
+"docker-compose up --build"
 
 Open the browser and access the port:
 "http://localhost:3000/api/student"
+"http://localhost:3000/api/questions"
+"http://localhost:3000/api/users"
 
 The output displayed there would be:
 { "name": "Levin Jospeh Poovakulath", "studentId" : "s224877838" }
+{"data": [], "currentPage": 1, "totalPages": 0, "totalQuestions": 0}
+{"message": "Unauthorized"}
 
-run 'docker ps' to get detils of the docker container rumming
+run 'docker ps' to get detils of the docker container running
