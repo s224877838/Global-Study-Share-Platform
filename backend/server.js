@@ -38,16 +38,15 @@ const {
 } = require("./controllers/profileController");
 
 const cors = require("cors");
-const router = express.Router();
-dotenv.config();
+
+dotenv.config(); // load env variables
 
 const app = express();
 app.use(cors());
-
 app.use(express.static(path.join(__dirname, "..", "public")));
-
 app.use(express.json());
 
+// Session extraction middleware
 const extractSession = (req, res, next) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
@@ -73,51 +72,59 @@ const extractSession = (req, res, next) => {
 };
 
 app.use(extractSession);
+
+// API Routes
+const router = express.Router();
 app.use("/api", router);
 
 // ************** Auth Routes **************
-
 router.post("/auth/logout", handleLogout);
 router.post("/auth/register", handleRegister);
 router.post("/auth/login", handleLogin);
 
-// *****************************************
 // ************** Question Routes **************
-// *****************************************
 router.get("/questions", getQuestions);
 router.get("/questions/:id", getQuestionDetails);
 router.post("/questions", isAuthenticated, createQuestion);
 router.put("/questions/:id", isAuthenticated, updateQuestion);
 router.delete("/questions/:id", isAuthenticated, deleteQuestion);
 
-// *****************************************
 // ************** Answer Routes **************
-// *****************************************
 router.post("/answers", isAuthenticated, createAnswer);
 router.put("/answers/:id", isAuthenticated, updateAnswer);
 router.delete("/answers/:id", isAuthenticated, deleteAnswer);
 
-// *****************************************
 // ************** User Routes **************
-// *****************************************
 router.get("/users", isAuthenticated, getUsers);
 router.get("/users/:id", isAuthenticated, getUserDetails);
 router.post("/users", isAuthenticated, isSuperAdmin, createUser);
 router.put("/users/:id", isAuthenticated, updateUser);
 router.delete("/users/:id", isAuthenticated, deleteUser);
 
-// *****************************************
 // ************** Profile Routes **************
-// *****************************************
 router.get("/profile", isAuthenticated, getProfile);
 router.post("/profile", isAuthenticated, updateProfile);
-mongoose.connect(process.env.MONGODB_URI).then(() => {
-  app.listen(process.env.PORT, () =>
-    console.log(`Server on ${process.env.PORT}`)
-  );
-});
 
-mongoose.connection.once("open", async () => {
-  await seedSuperAdmin();
-});
+// ************** Custom Student Route **************
 router.get("/student", studRte);
+
+// ************** DB Connection and Server Start **************
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(async () => {
+    console.log("MongoDB connected");
+
+    // Seed super admin user
+    await seedSuperAdmin();
+
+    // Start server after DB is ready
+    const port = process.env.PORT || 3000;
+    app.listen(port, () => console.log(`Server running on port ${port}`));
+  })
+  .catch((err) => {
+    console.error("Failed to connect to MongoDB:", err.message);
+    process.exit(1); // Exit the process if DB connection fails
+  });
